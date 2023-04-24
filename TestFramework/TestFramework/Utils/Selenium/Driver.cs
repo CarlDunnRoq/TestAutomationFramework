@@ -33,8 +33,16 @@ namespace TestFramework.Utils.Selenium
         [Test]
         public void Test()
         {
-            _webDriver.Navigate().GoToUrl("https://www.google.com");
-            Assert.True(_webDriver.Title.Contains("Google"));
+            _webDriver.Navigate().GoToUrl("https://www.saucedemo.com/");
+            Assert.True(_webDriver.Title.Contains("Swag Labs"));
+        }
+
+        [Test]
+        public void NegTest()
+        {
+            _webDriver.Navigate().GoToUrl("https://www.saucedemo.com/");
+            Assert.False(_webDriver.Title.Contains("Google"));
+
         }
     }
 }

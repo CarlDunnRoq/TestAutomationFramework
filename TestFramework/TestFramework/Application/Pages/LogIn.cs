@@ -8,5 +8,6 @@ namespace TestFramework.Application.Pages
 {
     internal class LogIn
     {
+
     }
 }
