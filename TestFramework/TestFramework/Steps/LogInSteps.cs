@@ -33,7 +33,7 @@ namespace TestFramework.Steps
         [Then(@"the products page will be displayed")]
         public void ThenTheProductsPageWillBeDisplayed()
         {
-            driver.Url.Equals("https://www.saucedemo.com/inventory.html");
+            Assert.That(driver.FindElement(By.XPath("//*[@id=\"header_container\"]/div[2]/span")).Text == "Products");
         }
 
     }
