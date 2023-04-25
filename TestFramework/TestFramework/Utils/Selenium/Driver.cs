@@ -15,20 +15,6 @@ namespace TestFramework.Utils.Selenium
     [TestFixture]
     public class Tests
     {
-        private IWebDriver _webDriver;
-
-        [SetUp]
-        public void SetUp()
-        {
-            new DriverManager().SetUpDriver(new ChromeConfig());
-            _webDriver = new ChromeDriver();
-        }
-
-        [TearDown]
-        public void TearDown()
-        {
-            _webDriver.Quit();
-        }
 
         [Test]
         public void Test()

@@ -29,5 +29,6 @@ namespace TestFramework.Utils.Hooks
         {
             driver.Quit();
         }
+        public void Sleep(int seconds) => Thread.Sleep(TimeSpan.FromSeconds(seconds));
     }
 }

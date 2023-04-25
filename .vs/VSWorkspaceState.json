@@ -1,7 +1,12 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\TestFramework",
+    "\\TestFramework\\TestFramework",
+    "\\TestFramework\\TestFramework\\Steps",
+    "\\TestFramework\\TestFramework\\Utils",
+    "\\TestFramework\\TestFramework\\Utils\\Selenium"
   ],
-  "SelectedNode": "\\C:\\Users\\carl.dunn\\OneDrive - ROQ IT\\Documents\\TestAutomationRepo\\TestAutomationFramework\\TestAutomationFramework",
+  "SelectedNode": "\\TestFramework\\TestFramework\\Steps\\LogInSteps.cs",
   "PreviewInSolutionExplorer": false
 }
