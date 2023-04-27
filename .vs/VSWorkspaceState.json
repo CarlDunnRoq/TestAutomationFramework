@@ -3,10 +3,12 @@
     "",
     "\\TestFramework",
     "\\TestFramework\\TestFramework",
+    "\\TestFramework\\TestFramework\\Application",
+    "\\TestFramework\\TestFramework\\Application\\Pages",
     "\\TestFramework\\TestFramework\\Steps",
     "\\TestFramework\\TestFramework\\Utils",
     "\\TestFramework\\TestFramework\\Utils\\Selenium"
   ],
-  "SelectedNode": "\\TestFramework\\TestFramework\\Steps\\LogInSteps.cs",
+  "SelectedNode": "\\TestFramework\\TestFramework.sln",
   "PreviewInSolutionExplorer": false
 }

@@ -1,34 +1,28 @@
-﻿using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Firefox;
+﻿using System;
+using System.Diagnostics;
+using System.IO;
 using OpenQA.Selenium;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Firefox;
 using WebDriverManager.DriverConfigs.Impl;
 using WebDriverManager;
-using OpenQA.Selenium.Edge;
 
 namespace TestFramework.Utils.Selenium
 {
-    [TestFixture]
-    public class Tests
+    public static class Driver
     {
+        [ThreadStatic]
+        public static IWebDriver CurrentDriver;
 
-        [Test]
-        public void Test()
+        public static void InitChrome()
         {
-            _webDriver.Navigate().GoToUrl("https://www.saucedemo.com/");
-            Assert.True(_webDriver.Title.Contains("Swag Labs"));
+            CurrentDriver = new ChromeDriver(Path.GetFullPath(@"C:\Users\carl.dunn\OneDrive - ROQ IT\Documents\TestAutomationRepo\TestAutomationFramework\TestAutomationFramework\TestFramework\TestFramework\" + "_drivers"));
         }
 
-        [Test]
-        public void NegTest()
-        {
-            _webDriver.Navigate().GoToUrl("https://www.saucedemo.com/");
-            Assert.False(_webDriver.Title.Contains("Google"));
 
+        public static void InitFirefox()
+        {
+            CurrentDriver = new FirefoxDriver(Path.GetFullPath(@"C:\Users\carl.dunn\OneDrive - ROQ IT\Documents\TestAutomationRepo\TestAutomationFramework\TestAutomationFramework\TestFramework\TestFramework\" + "_drivers"));
         }
     }
 }

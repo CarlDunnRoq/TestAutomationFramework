@@ -1,27 +1,23 @@
-﻿Feature: Succesful Customer Journey
+﻿@Chrome
+Feature: Succesful Customer Journey
 A happy-path scenario of a customer journey to purchase a single item.
 
-@LogIn
-Scenario: Successful Log On
-	Given the user is on the log in page
-	When the user logs in correctly
-	Then the products page will be displayed
+Scenario: 01. Validate the title of a website
+   Given a user is on the base page
+   Then they see the page title contains "Swag Labs"
 
-@AddToCart
-Scenario: Adding a product to the cart
-	Given the user is on the log in page
-	When the user logs in correctly
-	And the user adds Sauce Labs Bike Light to cart
-	Then the remove button will be displayed for the Sauce Labs Bike Light
+Scenario: 02. Validate the Url of a webpage
+    Given a user is on the base page
+    Then the page URL contains "https://www.saucedemo.com/"
 
-@FullJourney
-Scenario: The user will go from the log in page to successfully purchasing an item
-	Given the user is on the log in page
-	When the user logs in correctly
-	And the user adds Sauce Labs Bike Light to cart
-	And the user clicks the cart icon
-	And the user continues to checkout
-	And enters their information
-	And finishes their order on the overview
-	Then the checkout will be complete
-	And the user can click Back Home
+Scenario: 03. The user logs in correctly
+    Given a user is on the base page
+    When the user logs in correctly
+    Then the products page will be displayed
+
+Scenario: 04. The user adds a product to the basket
+    Given a user is on the base page
+    When the user logs in correctly
+    And adds product to their basket
+    Then the basket icon will change
+    And the remove button will be displayed
