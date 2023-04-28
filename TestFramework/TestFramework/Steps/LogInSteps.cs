@@ -1,35 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TechTalk.SpecFlow;
-using TestFramework.Application.Pages;
-using TestFramework.Pages;
+﻿using TestFramework.Application;
 
 namespace TestFramework.Steps
 {
-    public class LogInSteps : LogIn
+    [Binding]
+    public class LogInSteps : WebApp
     {
         [Given(@"a user is on the (?:base|search) page")]
         public void GivenADuckDuckGoUserIsOnTheBasePage()
         {
-            NavigateBaseUrl();
+            PageManager.BasePage.NavigateBaseUrl();
         }
         [Then(@"they see the page title contains ""(.*)""")]
         public void ThenTheySeeThePageTitleContains(string expectedTitle)
         {
-            ValidatePageTitle(expectedTitle);
+            PageManager.LogIn.ValidatePageTitle(expectedTitle);
         }
         [Then(@"the page URL contains ""(.*)""")]
         public void ThenThePageURLContains(string expectedUrl)
         {
-            ValidatePageUrl(expectedUrl);
+            PageManager.LogIn.ValidatePageUrl(expectedUrl);
         }
         [When(@"the user logs in correctly")]
         public void WhenTheUserLogsInCorrectly()
         {
-            StandardUserLogIn();
+            PageManager.LogIn.StandardUserLogIn();
         }
 
 

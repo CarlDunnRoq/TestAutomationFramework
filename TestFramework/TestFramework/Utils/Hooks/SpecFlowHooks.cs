@@ -11,7 +11,7 @@ namespace TestFramework.Utils.Hooks
     [Binding]
     internal static class SpecFlowHooks
     {
-        [Before]
+        [BeforeScenario]
         [Scope(Tag = "Chrome")]
         internal static void StartChromeDriver()
         {
@@ -25,10 +25,11 @@ namespace TestFramework.Utils.Hooks
             Driver.InitFirefox();
         }
 
-        [After]
+        [AfterScenario]
         internal static void StopWebDriver()
         {
             Driver.CurrentDriver.Quit();
         }
+        
     }
 }

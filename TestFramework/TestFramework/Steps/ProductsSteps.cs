@@ -1,43 +1,38 @@
-﻿using OpenQA.Selenium;
-using OpenQA.Selenium.Interactions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TechTalk.SpecFlow;
-using TestFramework.Utils.Hooks;
-using TestFramework.Utils.Selenium;
+﻿using TestFramework.Application;
 
 namespace TestFramework.Steps
 {
     [Binding]
-    internal class ProductsSteps : LogInSteps
+    internal class ProductsSteps : WebApp
     {
         [Then(@"the products page will be displayed")]
         public void ThenTheProductsPageWillBeDisplayed()
         {
-            Assert.That(driver.FindElement(By.XPath("//span[@class=\"title\"]")).Text == "Products");
-            //string proof = driver.FindElement(By.XPath("//span[@class=\"title\"]")).Text;
-            //Console.WriteLine("This is what is printed: " + proof);
+            PageManager.Products.ContentTitle("Products");
         }
-        [When(@"adds product to their basket")]
-        public void WhenAddsProductToTheirBasket()
+        [When(@"the user adds (.*) to their basket")]
+        public void WhenAddsProductToTheirBasket(string product)
         {
-            throw new PendingStepException();
+            PageManager.Products.AddToCart(product);
         }
 
-        [Then(@"the basket icon will change")]
-        public void ThenTheBasketIconWillChange()
+        [Then(@"the basket icon will change to (.*)")]
+        public void ThenTheBasketIconWillChange(int amount)
         {
-            throw new PendingStepException();
+            PageManager.Products.ShoppingCartAmount(amount);
         }
 
-        [Then(@"the remove button will be displayed")]
-        public void ThenTheRemoveButtonWillBeDisplayed()
+        [Then(@"the remove button for (.*) will be displayed")]
+        public void ThenTheRemoveButtonWillBeDisplayed(string product)
         {
-            throw new PendingStepException();
+            PageManager.Products.DeleteFromCart(product);
         }
+        [Then(@"the user clicks on the basket icon")]
+        public void WhenTheUserClicksOnTheBasketIcon()
+        {
+            PageManager.Products.TakeMeToYourCart();
+        }
+
 
     }
 }

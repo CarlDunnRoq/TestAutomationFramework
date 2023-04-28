@@ -1,1 +1,12 @@
+global using System;
+global using System.Collections.Generic;
+global using System.Linq;
+global using System.Text;
+global using System.Threading.Tasks;
 global using NUnit.Framework;
+global using TestFramework.Pages;
+global using TestFramework.Application;
+global using TestFramework.Application.Pages;
+global using OpenQA.Selenium;
+global using TestFramework.Utils.Selenium;
+global using TechTalk.SpecFlow;

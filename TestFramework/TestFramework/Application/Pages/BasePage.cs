@@ -1,13 +1,4 @@
-﻿using OpenQA.Selenium;
-using SeleniumExtras.PageObjects;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TestFramework.Utils.Hooks;
-using TestFramework.Utils.Selenium;
-using static TestFramework.Utils.Selenium.Settings;
+﻿using static TestFramework.Utils.Selenium.Settings;
 
 namespace TestFramework.Pages
 {
@@ -44,5 +35,14 @@ namespace TestFramework.Pages
             Assert.IsTrue(pageSourceTextToValidate, " :: The expected string is not present in the page source");
             Console.WriteLine(" :: The page source does not contain " + expectedSource);
         }*/
+        public void ContentTitle(string title)
+        {
+            Assert.That(driver.FindElement(By.XPath("//span[@class=\"title\"]")).Text == title);
+        }
+        public void ClickButton(string button)
+        {
+            string newButton = button.ToLower().Replace(" ", "-");
+            driver.FindElement(By.Id(newButton)).Click();
+        }
     }
 }

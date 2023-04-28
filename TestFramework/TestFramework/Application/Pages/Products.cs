@@ -1,12 +1,4 @@
-﻿using OpenQA.Selenium;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TestFramework.Pages;
-
-namespace TestFramework.Application.Pages
+﻿namespace TestFramework.Application.Pages
 {
     public class Products : BasePage
     {
@@ -15,5 +7,20 @@ namespace TestFramework.Application.Pages
             string newProduct = product.ToLower().Replace(" ", "-");
             driver.FindElement(By.XPath($"//button[@id=\"add-to-cart-{newProduct}\"]")).Click();
         }
+        public void DeleteFromCart(string product)
+        {
+            string newProduct = product.ToLower().Replace(" ", "-");
+            IWebElement ProductItem = driver.FindElement(By.XPath($"//button[@id=\"remove-{newProduct}\"]"));
+            Assert.True(ProductItem.Displayed);
+        }
+        public void ShoppingCartAmount(int amount)
+        {
+            driver.FindElement(By.XPath($"//span[contains(.,{amount})]"));
+        }
+        public void TakeMeToYourCart()
+        {
+            driver.FindElement(By.XPath("//a[@class=\"shopping_cart_link\"]")).Click();
+        }
     }
-}
+
+ }
