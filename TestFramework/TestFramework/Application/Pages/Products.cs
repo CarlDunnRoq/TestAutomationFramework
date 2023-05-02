@@ -21,6 +21,7 @@
         {
             driver.FindElement(By.XPath("//a[@class=\"shopping_cart_link\"]")).Click();
         }
+        }
     }
 
- }
+ 

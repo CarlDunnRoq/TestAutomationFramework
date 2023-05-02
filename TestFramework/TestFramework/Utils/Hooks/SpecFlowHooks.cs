@@ -30,6 +30,5 @@ namespace TestFramework.Utils.Hooks
         {
             Driver.CurrentDriver.Quit();
         }
-        
     }
 }

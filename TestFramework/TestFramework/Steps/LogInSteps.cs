@@ -5,8 +5,8 @@ namespace TestFramework.Steps
     [Binding]
     public class LogInSteps : WebApp
     {
-        [Given(@"a user is on the (?:base|search) page")]
-        public void GivenADuckDuckGoUserIsOnTheBasePage()
+        [Given(@"a user is on the base page")]
+        public void GivenAUserIsOnTheBasePage()
         {
             PageManager.BasePage.NavigateBaseUrl();
         }
@@ -24,6 +24,16 @@ namespace TestFramework.Steps
         public void WhenTheUserLogsInCorrectly()
         {
             PageManager.LogIn.StandardUserLogIn();
+        }
+        [When(@"the user logs in incorrectly")]
+        public void WhenTheUserLogsInIncorrectly()
+        {
+            PageManager.LogIn.IncorrectUserLogIn();
+        }
+        [Then(@"an error message will be displayed")]
+        public void ThenAnErrorMessageWillBeDisplayed()
+        {
+            Assert.True(PageManager.LogIn.ErrorMessage.Displayed);
         }
 
 

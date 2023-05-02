@@ -19,6 +19,11 @@
         {
             PageManager.YourCart.ClickButton(button);
         }
+        [Then(@"the result will be (.*)")]
+        public void ThenTheResultWillBe(string price)
+        {
+            PageManager.YourCart.ConfirmPrice(price);
+        }
 
     }
 }

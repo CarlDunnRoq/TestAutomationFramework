@@ -15,5 +15,9 @@ namespace TestFramework.Application.Pages
         {
             Assert.IsNotNull(driver.FindElement(By.XPath($"//a//div[contains(.,'{product}')]")));
         }
+        public void ConfirmPrice(string price)
+        {
+            Assert.IsNotNull(driver.FindElement(By.XPath($"//div[(text()={price})]")));
+        }
     }
 }

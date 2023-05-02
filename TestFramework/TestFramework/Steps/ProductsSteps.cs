@@ -32,7 +32,6 @@ namespace TestFramework.Steps
         {
             PageManager.Products.TakeMeToYourCart();
         }
-
-
+        
     }
 }

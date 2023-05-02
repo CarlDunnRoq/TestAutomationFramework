@@ -8,7 +8,6 @@ namespace TestFramework.Pages
         public string GetTitle => Driver.CurrentDriver.Title;
         public string GetUrl => Driver.CurrentDriver.Url;
         public string GetPageSource => Driver.CurrentDriver.PageSource;
-        public By SearchField => By.Id("search_form_input_homepage");
 
         public void NavigateBaseUrl()
         {
