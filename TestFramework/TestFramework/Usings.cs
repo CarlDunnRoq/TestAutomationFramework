@@ -10,3 +10,6 @@ global using TestFramework.Application.Pages;
 global using OpenQA.Selenium;
 global using TestFramework.Utils.Selenium;
 global using TechTalk.SpecFlow;
+global using AventStack.ExtentReports;
+global using AventStack.ExtentReports.Reporter;
+global using AventStack.ExtentReports.Reporter.Configuration;
