@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TestFramework.Utilities;
 
 namespace TestAutomationFrameworkSpecflow.Utilities
 {
@@ -46,7 +47,7 @@ namespace TestAutomationFrameworkSpecflow.Utilities
             _extentReports.Flush();
         }
 
-        public string addScreenshot(IWebDriver driver, ScenarioContext scenarioContext)
+        public string addScreenshot(DriverHelper driver, ScenarioContext scenarioContext)
         {
             ITakesScreenshot takesScreenshot = (ITakesScreenshot) driver;
             Screenshot screenshot = takesScreenshot.GetScreenshot();

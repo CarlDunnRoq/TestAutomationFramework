@@ -1,41 +1,41 @@
 ﻿using OpenQA.Selenium;
 using TestAutomationFrameworkSpecflow.Pages;
+using TestFramework.Pages;
+using TestFramework.Utilities;
 
 namespace TestFramework.Steps
 {
     [Binding]
     public class YourCartSteps
     {
-        private readonly IWebDriver driver;
-        YourCart YourCart;
-        public YourCartSteps(IWebDriver driver)
+        private DriverHelper _driverHelper;
+        private WebApp _webApp;
+
+        public YourCartSteps(DriverHelper driverHelper, WebApp webApp)
         {
-            this.driver = driver;
+            _driverHelper = driverHelper;
+            _webApp = webApp;
         }
 
         [Then(@"the user is taken to the (.*) page")]
         public void ThenTheUserWillBeTakenToThePage(string title)
         {
-            YourCart = new YourCart(driver);
-            YourCart.ContentTitle(title);
+            _webApp.YourCart.ContentTitle(title);
         }
         [When(@"the user sees (.*) in their cart")]
         public void WhenTheUserSeesItemInTheirCart(string product)
         {
-            YourCart = new YourCart(driver);
-            YourCart.CartConfirmation(product);
+            _webApp.YourCart.CartConfirmation(product);
         }
         [When(@"the user clicks (.*)")]
         public void WhenTheUserClicksButton(string button)
         {
-            YourCart = new YourCart(driver);
-            YourCart.ClickButton(button);
+            _webApp.YourCart.ClickButton(button);
         }
         [Then(@"the result is going to be (.*)")]
         public void ThenTheResultWillBe(string price)
         {
-            YourCart = new YourCart(driver);
-            YourCart.ConfirmPrice(price);
+            _webApp.YourCart.ConfirmPrice(price);
         }
 
     }

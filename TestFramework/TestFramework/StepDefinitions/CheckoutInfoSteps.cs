@@ -1,22 +1,26 @@
 ﻿using OpenQA.Selenium;
 using TestAutomationFrameworkSpecflow.Pages;
+using TestFramework.Pages;
+using TestFramework.Utilities;
 
 namespace TestFramework.Steps
 {
     [Binding]
     public class CheckoutInfoSteps
     {
-        private readonly IWebDriver driver;
-        CheckoutInfo CheckoutInfo;
-        public CheckoutInfoSteps(IWebDriver driver)
+        private DriverHelper _driverHelper;
+        private WebApp _webApp;
+
+        public CheckoutInfoSteps(DriverHelper driverHelper, WebApp webApp)
         {
-            this.driver = driver;
+            _driverHelper = driverHelper;
+            _webApp = webApp;
         }
+
         [When(@"the user enters their information")]
         public void WhenTheUserEntersTheirInformation()
         {
-            CheckoutInfo = new CheckoutInfo(driver);
-            CheckoutInfo.FillDetails();
+            _webApp.CheckoutInfo.FillDetails();
         }
 
     }

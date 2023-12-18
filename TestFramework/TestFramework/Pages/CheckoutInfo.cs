@@ -4,24 +4,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TestFramework.Pages;
+using TestFramework.Utilities;
 
 namespace TestAutomationFrameworkSpecflow.Pages
 {
-    public class CheckoutInfo
+    public class CheckoutInfo : BasePage
     {
-        private IWebDriver driver;
-        public CheckoutInfo(IWebDriver driver)
-        {
-            this.driver = driver;
-        }
         public void FillDetails()
         {
-            driver.FindElement(By.Id("first-name")).Click();
-            driver.FindElement(By.Id("first-name")).SendKeys("Test First Name");
-            driver.FindElement(By.Id("last-name")).Click();
-            driver.FindElement(By.Id("last-name")).SendKeys("Test Last Name");
-            driver.FindElement(By.Id("postal-code")).Click();
-            driver.FindElement(By.Id("postal-code")).SendKeys("P0stC0d3");
+            _driverHelper.driver.FindElement(By.Id("first-name")).Click();
+            _driverHelper.driver.FindElement(By.Id("first-name")).SendKeys("Test First Name");
+            _driverHelper.driver.FindElement(By.Id("last-name")).Click();
+            _driverHelper.driver.FindElement(By.Id("last-name")).SendKeys("Test Last Name");
+            _driverHelper.driver.FindElement(By.Id("postal-code")).Click();
+            _driverHelper.driver.FindElement(By.Id("postal-code")).SendKeys("P0stC0d3");
         }
+
+        public CheckoutInfo(DriverHelper _driverHelper) : base(_driverHelper) { }
     }
 }

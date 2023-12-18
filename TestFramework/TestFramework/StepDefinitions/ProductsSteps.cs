@@ -1,56 +1,55 @@
 ﻿using OpenQA.Selenium;
 using TestAutomationFrameworkSpecflow.Pages;
+using TestFramework.Pages;
+using TestFramework.Utilities;
 
 namespace TestFramework.Steps
 {
     [Binding]
     public class ProductsSteps
     {
-        private readonly IWebDriver driver;
-        Products Products;
-        public ProductsSteps(IWebDriver driver)
+        private DriverHelper _driverHelper;
+        private WebApp _webApp;
+
+        public ProductsSteps(DriverHelper driverHelper, WebApp webApp)
         {
-            this.driver = driver;
+            _driverHelper = driverHelper;
+            _webApp = webApp;
         }
+
         [Then(@"I will be taken to the (.*) page")]
         public void ThenIWillBeTakenToTheDashboard(string page)
         {
-            Products = new Products(driver);
-            Products.ContentTitle(page);
+            _webApp.Products.ContentTitle(page);
         }
         [When(@"the user adds (.*) to their basket")]
         public void WhenAddsProductToTheirBasket(string product)
         {
-            Products = new Products(driver);
-            Products.AddToCart(product);
+            _webApp.Products.AddToCart(product);
         }
 
         [Then(@"the basket icon will change to (.*)")]
         public void ThenTheBasketIconWillChange(int amount)
         {
-            Products = new Products(driver);
-            Products.ShoppingCartAmount(amount);
+            _webApp.Products.ShoppingCartAmount(amount);
         }
 
         [Then(@"the remove button for (.*) is displayed")]
         public void ThenTheRemoveButtonWillBeDisplayed(string product)
         {
-            Products = new Products(driver);
-            Products.DeleteFromCart(product);
+            _webApp.Products.DeleteFromCart(product);
         }
         [Then(@"the user clicks on the basket icon")]
         public void WhenTheUserClicksOnTheBasketIcon()
         {
-            Products = new Products(driver);
-            Products.TakeMeToYourCart();
+            _webApp.Products.TakeMeToYourCart();
         }
 
         [Then(@"the (.*) will be (.*)")]
         public void ThenProductAndPriceWillMatch(string product, string price)
         {
-            Products = new Products(driver);
-            Products.ProductName(product);
-            Products.ProductPrice(price);
+            _webApp.Products.ProductName(product);
+            _webApp.Products.ProductPrice(price);
         }
     }
 }

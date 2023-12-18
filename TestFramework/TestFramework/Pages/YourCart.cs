@@ -5,32 +5,30 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TestFramework.Pages;
+using TestFramework.Utilities;
 
 namespace TestAutomationFrameworkSpecflow.Pages
 {
-    public class YourCart
+    public class YourCart : BasePage
     {
-        private IWebDriver driver;
-        public YourCart(IWebDriver driver)
-        {
-            this.driver = driver;
-        }
         public void CartConfirmation(string product)
         {
-            Assert.IsNotNull(driver.FindElement(By.XPath($"//a//div[contains(.,'{product}')]")));
+            ClassicAssert.IsNotNull(_driverHelper.driver.FindElement(By.XPath($"//a//div[contains(.,'{product}')]")));
         }
         public void ConfirmPrice(string price)
         {
-            Assert.IsNotNull(driver.FindElement(By.XPath($"//div[(text()={price})]")));
+            ClassicAssert.IsNotNull(_driverHelper.driver.FindElement(By.XPath($"//div[(text()={price})]")));
         }
         public void ContentTitle(string title)
         {
-            Assert.That(driver.FindElement(By.XPath("//span[@class=\"title\"]")).Text == title);
+            Assert.That(_driverHelper.driver.FindElement(By.XPath("//span[@class=\"title\"]")).Text == title);
         }
         public void ClickButton(string button)
         {
             string newButton = button.ToLower().Replace(" ", "-");
-            driver.FindElement(By.Id(newButton)).Click();
+            _driverHelper.driver.FindElement(By.Id(newButton)).Click();
         }
+        public YourCart(DriverHelper _driverHelper) : base(_driverHelper) { }
     }
 }

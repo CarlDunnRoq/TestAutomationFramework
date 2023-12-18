@@ -1,6 +1,7 @@
 ﻿using AventStack.ExtentReports;
 using AventStack.ExtentReports.Gherkin.Model;
 using BoDi;
+using Docker.DotNet.Models;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Edge;
@@ -9,6 +10,7 @@ using OpenQA.Selenium.Remote;
 using System;
 using TechTalk.SpecFlow;
 using TestAutomationFrameworkSpecflow.Utilities;
+using TestFramework.Utilities;
 
 namespace TestAutomationFrameworkSpecflow.Hooks
 {
@@ -43,124 +45,26 @@ namespace TestAutomationFrameworkSpecflow.Hooks
             _feature = _extentReports.CreateTest<Feature>(featureContext.FeatureInfo.Title);
         }
 
-        [AfterFeature]
-        public static void AfterFeature()
-        {
-            Console.WriteLine("Running after feature...");
-        }
-
-        [BeforeScenario("@tag2")]
-        public void BeforeScenarioWithTag()
-        {
-            Console.WriteLine("Running tagged tests...");
-        }
-
         [BeforeScenario(Order = 1)]
         public void FirstBeforeScenario(ScenarioContext scenarioContext)
         {
             Console.WriteLine("Running before scenario...");
             TestPrint();
+            _scenario = _feature.CreateNode<Scenario>(scenarioContext.ScenarioInfo.Title);
+            DriverHelper driverHelper = new();
+            String browserName = "Chrome";
+            driverHelper.InitBrowser(browserName);
+            driverHelper.driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
+            driverHelper.driver.Manage().Window.Maximize();
+            driverHelper.driver.Url = "https://www.saucedemo.com/";
+            _container.RegisterInstanceAs(driverHelper);
 
-            if (Settings.Environment == "Local")
-            {
-                if (Settings.Browser == "Chrome")
-                {
-                    if (Settings.Headless == true)
-                    {
-                        var options = new ChromeOptions();
-                        options.AddArgument("--headless=new");
-                        IWebDriver driver = new ChromeDriver(options);
-
-                        _container.RegisterInstanceAs<IWebDriver>(driver);
-                        _scenario = _feature.CreateNode<Scenario>(scenarioContext.ScenarioInfo.Title);
-                    }
-                    else
-                    {
-                        IWebDriver driver = new ChromeDriver();
-                        driver.Manage().Window.Maximize();
-
-                        _container.RegisterInstanceAs<IWebDriver>(driver);
-                        _scenario = _feature.CreateNode<Scenario>(scenarioContext.ScenarioInfo.Title);
-                    }
-                }
-                else if (Settings.Browser == "Firefox")
-                {
-                    if (Settings.Headless == true)
-                    {
-                        var options = new FirefoxOptions();
-                        options.AddArgument("--headless=new");
-                        IWebDriver driver = new FirefoxDriver(options);
-
-                        _container.RegisterInstanceAs<IWebDriver>(driver);
-                        _scenario = _feature.CreateNode<Scenario>(scenarioContext.ScenarioInfo.Title);
-                    }
-                    else
-                    {
-                        IWebDriver driver = new FirefoxDriver();
-                        driver.Manage().Window.Maximize();
-                        _container.RegisterInstanceAs<IWebDriver>(driver);
-                        _scenario = _feature.CreateNode<Scenario>(scenarioContext.ScenarioInfo.Title);
-                    }
-                }
-                else if (Settings.Browser == "Edge")
-                {
-                    if (Settings.Headless == true)
-                    {
-                        var options = new EdgeOptions();
-                        options.AddArgument("--headless=new");
-                        IWebDriver driver = new EdgeDriver(options);
-
-                        _container.RegisterInstanceAs<IWebDriver>(driver);
-                        _scenario = _feature.CreateNode<Scenario>(scenarioContext.ScenarioInfo.Title);
-                    }
-                    else
-                    {
-                        IWebDriver driver = new EdgeDriver();
-                        driver.Manage().Window.Maximize();
-                        _container.RegisterInstanceAs<IWebDriver>(driver);
-                        _scenario = _feature.CreateNode<Scenario>(scenarioContext.ScenarioInfo.Title);
-                    }
-
-                }
-            }
-            else if(Settings.Environment == "Docker")
-            {
-                if (Settings.Browser == "Chrome")
-                {
-                        var options = new ChromeOptions();
-                        IWebDriver driver = new RemoteWebDriver(new Uri("http://localhost:4445/ui"), options);
-
-                        _container.RegisterInstanceAs<IWebDriver>(driver);
-                        _scenario = _feature.CreateNode<Scenario>(scenarioContext.ScenarioInfo.Title);
-                }
-                else if (Settings.Browser == "Firefox")
-                {
-                        var options = new FirefoxOptions();
-                        IWebDriver driver = new RemoteWebDriver(new Uri("http://localhost:4446/ui"), options);
-
-                        _container.RegisterInstanceAs<IWebDriver>(driver);
-                        _scenario = _feature.CreateNode<Scenario>(scenarioContext.ScenarioInfo.Title);
-                }
-                else if (Settings.Browser == "Edge")
-                {
-                        var options = new EdgeOptions();
-                        IWebDriver driver = new RemoteWebDriver(new Uri("http://localhost:4444/ui"), options);
-
-                        _container.RegisterInstanceAs<IWebDriver>(driver);
-                        _scenario = _feature.CreateNode<Scenario>(scenarioContext.ScenarioInfo.Title);
-                }           
-            }
         }
 
         [AfterScenario]
         public void AfterScenario()
         {
-           var driver = _container.Resolve<IWebDriver>();
-
-           if(driver != null)
-           {
-                driver.Quit();
-           }
+           _container.Resolve<DriverHelper>().KillDriver();
         }
 
         [AfterStep]
@@ -169,7 +73,7 @@ namespace TestAutomationFrameworkSpecflow.Hooks
             Console.WriteLine("Running after step...");
             string stepType = scenarioContext.StepContext.StepInfo.StepDefinitionType.ToString();
             string stepName = scenarioContext.StepContext.StepInfo.Text;
-            var driver = _container.Resolve<IWebDriver>();
+            var driver = _container.Resolve<DriverHelper>();
 
             //When the scenario passes
             if (scenarioContext.TestError == null)

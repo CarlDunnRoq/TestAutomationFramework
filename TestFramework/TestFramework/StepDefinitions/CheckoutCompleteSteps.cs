@@ -6,30 +6,33 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TestFramework.Utilities;
+using NUnit.Framework.Legacy;
+using TestFramework.Pages;
 
 namespace TestFramework.Steps
 {
     [Binding]
     public class CheckoutCompleteSteps
     {
-        private readonly IWebDriver driver;
-        CheckoutComplete CheckoutComplete;
-        public CheckoutCompleteSteps(IWebDriver driver)
+        private DriverHelper _driverHelper;
+        private WebApp _webApp;
+
+        public CheckoutCompleteSteps(DriverHelper driverHelper, WebApp webApp)
         {
-            this.driver = driver;
+            _driverHelper = driverHelper;
+            _webApp = webApp;
         }
 
         [Then(@"Thank you for your order! will be displayed")]
         public void ThenThankYouForYourOrderWillBeDisplayed()
         {
-            CheckoutComplete = new CheckoutComplete(driver);
-            Assert.True(CheckoutComplete.ThankYou.Displayed);
+            ClassicAssert.True(_webApp.CheckoutComplete.ThankYou.Displayed);
         }
         [Then(@"the user clicks Back Home")]
         public void ThenTheUserClicksBackHome()
         {
-            CheckoutComplete = new CheckoutComplete(driver);
-            CheckoutComplete.BackHome.Click();
+            _webApp.CheckoutComplete.BackHome.Click();
         }
 
     }
