@@ -2,14 +2,8 @@
 using AventStack.ExtentReports.Reporter;
 using AventStack.ExtentReports.Reporter.Config;
 using OpenQA.Selenium;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TestFramework.Utilities;
 
-namespace TestAutomationFrameworkSpecflow.Utilities
+namespace TestFramework.Utilities
 {
     public class ExtentReport
     {
@@ -47,10 +41,9 @@ namespace TestAutomationFrameworkSpecflow.Utilities
             _extentReports.Flush();
         }
 
-        public string addScreenshot(DriverHelper driver, ScenarioContext scenarioContext)
+        public string addScreenshot(DriverHelper driverHelper, ScenarioContext scenarioContext)
         {
-            ITakesScreenshot takesScreenshot = (ITakesScreenshot) driver;
-            Screenshot screenshot = takesScreenshot.GetScreenshot();
+            Screenshot screenshot = driverHelper.GetScreenshot();
             string screenshotLocation = Path.Combine(testResultPath, scenarioContext.ScenarioInfo.Title+".png");
             screenshot.SaveAsFile(screenshotLocation);
             return screenshotLocation;

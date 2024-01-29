@@ -12,7 +12,7 @@ using TechTalk.SpecFlow;
 using TestAutomationFrameworkSpecflow.Utilities;
 using TestFramework.Utilities;
 
-namespace TestAutomationFrameworkSpecflow.Hooks
+namespace TestFramework.Hooks
 {
     [Binding]
     public sealed class Hooks : ExtentReport
@@ -52,11 +52,12 @@ namespace TestAutomationFrameworkSpecflow.Hooks
             TestPrint();
             _scenario = _feature.CreateNode<Scenario>(scenarioContext.ScenarioInfo.Title);
             DriverHelper driverHelper = new();
-            String browserName = "Chrome";
-            driverHelper.InitBrowser(browserName);
+            string browserName = Settings.Browser;
+            bool isRemote = Settings.Remote;
+            driverHelper.InitBrowser(browserName, isRemote);
             driverHelper.driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
             driverHelper.driver.Manage().Window.Maximize();
-            driverHelper.driver.Url = "https://www.saucedemo.com/";
+            driverHelper.driver.Url = Settings.URL;
             _container.RegisterInstanceAs(driverHelper);
 
         }

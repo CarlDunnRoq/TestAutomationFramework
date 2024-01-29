@@ -1,16 +1,4 @@
-﻿using NUnit.Framework;
-using OpenQA.Selenium;
-using TestAutomationFrameworkSpecflow.Pages;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TestFramework.Utilities;
-using NUnit.Framework.Legacy;
-using TestFramework.Pages;
-
-namespace TestFramework.Steps
+﻿namespace TestFramework.Steps
 {
     [Binding]
     public class CheckoutCompleteSteps

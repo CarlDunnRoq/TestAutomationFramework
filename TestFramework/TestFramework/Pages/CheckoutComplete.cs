@@ -1,8 +1,4 @@
-﻿using OpenQA.Selenium;
-using TestFramework.Pages;
-using TestFramework.Utilities;
-
-namespace TestAutomationFrameworkSpecflow.Pages
+﻿namespace TestFramework.Pages
 {
     public class CheckoutComplete : BasePage
     {

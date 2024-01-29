@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TestAutomationFrameworkSpecflow.Pages;
-using TestFramework.Utilities;
-
-namespace TestFramework.Pages
+﻿namespace TestFramework.Pages
 {
     public class WebApp : BasePage
     {

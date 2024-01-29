@@ -1,15 +1,4 @@
-﻿using NUnit.Framework;
-using OpenQA.Selenium;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TestAutomationFrameworkSpecflow.Pages;
-using TestFramework.Pages;
-using TestFramework.Utilities;
-
-namespace TestAutomationFrameworkSpecflow.StepDefinitions
+﻿namespace TestFramework.Steps
 {
     [Binding]
     public class LogInSteps

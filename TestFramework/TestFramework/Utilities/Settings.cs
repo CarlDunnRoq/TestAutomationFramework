@@ -5,7 +5,7 @@ using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TestAutomationFrameworkSpecflow.Utilities
+namespace TestFramework.Utilities
 {
     public static class Settings
     {
@@ -13,7 +13,9 @@ namespace TestAutomationFrameworkSpecflow.Utilities
         public static string Browser = "Chrome";
         //Headless or Headed Browser
         public static bool Headless = false;
-        //Local or Docker
-        public static string Environment = "Local";
+        //Local or Remote
+        public static bool Remote = false;
+        //Starting URL
+        public static string URL = "https://www.saucedemo.com/";
     }
 }

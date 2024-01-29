@@ -1,9 +1,4 @@
-﻿using OpenQA.Selenium;
-using TestAutomationFrameworkSpecflow.Pages;
-using TestFramework.Pages;
-using TestFramework.Utilities;
-
-namespace TestFramework.Steps
+﻿namespace TestFramework.Steps
 {
     [Binding]
     public class ProductsSteps
